@@ -1,0 +1,439 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>
+      /run/media/prabhu/18A22969A2294C96/Users/Vinayak/Dropbox/Notes/Concepts/Web/HTTP.md.html
+    </title>
+    <meta name="Generator" content="Vim/8.0" />
+    <meta name="plugin-version" content="vim8.1_v1" />
+    <meta name="syntax" content="mkd" />
+    <meta
+      name="settings"
+      content="use_css,no_foldcolumn,expand_tabs,prevent_copy="
+    />
+    <meta name="colorscheme" content="onedark" />
+    <style type="text/css">
+      <!--
+      pre { font-family: monospace; color: #afafaf; background-color: #262626; }
+      body { font-family: monospace; color: #afafaf; background-color: #262626; }
+      * { font-size: 1em; }
+      .mkdDelimiter { color: #d75fd7; }
+      .Operator { color: #d75fd7; }
+      .htmlBold { color: #d7875f; font-weight: bold; }
+      .htmlH1 { color: #ff5f87; }
+      .htmlH2 { color: #ff5f87; }
+      .htmlH3 { color: #ff5f87; }
+      .Number { color: #d7875f; }
+      .mkdHeading { color: #ff5f87; }
+      .mkdLink { color: #00afff; }
+      .mkdURL { color: #00afd7; text-decoration: underline; }
+      .Special { color: #00afff; }
+      .Statement { color: #d75fd7; }
+      .Identifier { color: #ff5f87; }
+      .htmlH4 { color: #ff5f87; }
+      .htmlItalic { color: #d75fd7; font-style: italic; }
+      .htmlLink { color: #00afd7; text-decoration: underline; }
+      .htmlTag { color: #afafaf; }
+      .htmlTagName { color: #ff5f87; }
+      .String { color: #87d787; }
+      .Comment { color: #5f5f5f; font-style: italic; }
+      -->
+    </style>
+  </head>
+  <body>
+    <pre id="vimCodeElement">
+<span class="mkdHeading">#</span><span class="htmlH1"> Hypertext Transfer Protocol (HTTP)</span>
+
+**<span class="htmlBold">Hypertext Transfer Protocol (HTTP)</span>** is an _<span class="htmlItalic">application-layer</span>_ protocol for transmitting hypermedia documents, such as HTML.
+
+<span class="Identifier">-</span> HTTP is one of the main technologies used by the World Wide Web (WWW).
+
+<span class="Identifier">-</span> Uses _<span class="htmlItalic">Client-Server</span>_ model.
+<span class="Identifier">-</span> Based on a _<span class="htmlItalic">request</span>_ and a _<span class="htmlItalic">response</span>_.
+<span class="Identifier">-</span> HTTP is often based on _<span class="htmlItalic">TCP/IP</span>_ layer, it can be used on any reliable transport layer.
+
+The main features of HTTP are:
+
+<span class="Identifier">-</span> HTTP is simple - human-readable.
+<span class="Identifier">-</span> HTTP is extendable - easy to implement new features.
+<span class="Identifier">-</span> HTTP is a <span class="mkdDelimiter">[</span><span class="mkdLink">stateless protocol</span><span class="mkdDelimiter">](</span><span class="mkdURL"><a href="https://en.wikipedia.org/wiki/Stateless_protocol">https://en.wikipedia.org/wiki/Stateless_protocol</a></span><span class="mkdDelimiter">)</span>, meaning that the server does not keep any data (state) between two requests. **<span class="htmlBold">Not session less</span>**, HTTP Cookies allow the use of stateful sessions.
+
+::: tip Internet
+The internet is a collection of public computers through the shared use of the Internet Protocol (IP). It's made up of many services, including the WWW (or the web), email, file sharing, and internet telephony. The web, therefore, is but one part of the internet, though it's the most visible part.
+:::
+
+<span class="mkdHeading">##</span><span class="htmlH2"> What happens when you browse the web?</span>
+
+<span class="Identifier">1.</span> The browser requests for the real address of <span class="mkdDelimiter">[</span><span class="mkdLink">www.google.com</span><span class="mkdDelimiter">](</span><span class="mkdURL"><a href="http://www.google.com/">http://www.google.com/</a></span><span class="mkdDelimiter">)</span> from a Domain Name System (DNS) server.
+
+<span class="Identifier">   -</span> DNS returns an IP address.
+<span class="Identifier">   -</span> This IP address can be in an IPv4 or the newer IPv6.
+
+<span class="Identifier">2.</span> The browser asks your computer to open a _<span class="htmlItalic">Transmission Control Protocol (TCP)</span>_ connection over IP to this address on the standard web port (port 80) or over the standard secure web port (port 443).
+
+<span class="Identifier">   -</span> IP is used to direct traffic through the internet, but TCP adds stability and retransmissions to make the connection reliable.
+<span class="Identifier">   -</span> TCP/IP together, they form the backbone of much of the internet.
+
+<span class="Identifier">3.</span> When the browser has a connection to the webserver, it can start asking for the website. This step is where HTTP comes in, and the web browser uses HTTP to ask the Google server for the Google home page.
+
+<span class="Identifier">   -</span> The actual full URL includes the port and would be <span class="mkdDelimiter">[</span><span class="htmlLink"><a href="http://www.google.com:80">http://www.google.com:80</a></span><span class="mkdDelimiter">](</span><span class="mkdURL"><a href="http://www.google.com/">http://www.google.com/</a></span><span class="mkdDelimiter">)</span>, but if standard ports are being used (80 for HTTP and 443 for HTTPS), the browser hides the port.
+<span class="Identifier">   -</span> If nonstandard ports are being used, the port is shown. Some systems, particularly in development environments, use port 8080 for HTTP or 8443 for HTTPS, for example.
+
+<span class="Identifier">4.</span> The Google server responds with whatever URL you asked for. Typically, what gets sent back from the initial page is the text that makes up the web page in HTML format.
+<span class="Identifier">   -</span> Instead of an HTML page, however, the response may be an instruction to go to a different location. Google, for example, runs only on HTTPS, so if you go to <span class="mkdDelimiter">[</span><span class="htmlLink"><a href="http://www.google.com">http://www.google.com</a></span><span class="mkdDelimiter">](</span><span class="mkdURL"><a href="http://www.google.com/">http://www.google.com/</a></span><span class="mkdDelimiter">)</span>, the response is a special HTTP instruction (usually, a 301 or 302 response code) that redirects to a new location at <span class="mkdDelimiter">[</span><span class="htmlLink"><a href="https://www.google.com">https://www.google.com</a></span><span class="mkdDelimiter">](</span><span class="mkdURL"><a href="https://www.google.com/">https://www.google.com/</a></span><span class="mkdDelimiter">)</span>.
+<span class="Identifier">   -</span> Similarly, if something goes wrong, you get back an HTTP response code, the best-known of which is the 404 Not Found response code.
+
+<span class="Identifier">5.</span> The web browser processes the returned request. Assuming that the returned response is HTML, the browser starts to parse the HTML code and builds in memory the Document Object Model (DOM), which is an internal representation of the page.
+<span class="Identifier">6.</span> The web browser requests any additional resources it needs. Each of these resources is requested similarly, following steps 1–6, and yes, that includes this step, because those resources may in turn request other resources. The average website isn't as lean as Google and needs 75 resources, often from many domains, so steps 1–6 must be repeated for all of them. This situation is one of the key things that makes web browsing slow and one of the key reasons for HTTP/2, the main purpose of which is to make requesting these additional resources more efficient.
+<span class="Identifier">7.</span> When the browser has enough of the critical resources, it starts to render the page onscreen. Choosing when to start rendering the page is a challenging task and not as simple as it sounds. If the web browser waits until all resources are downloaded, it would take a long time to show web pages, and the web would be an even slower, more frustrating place. But if the web browser starts to render the page too soon, you end up with the page jumping around as more content downloads, which is irritating if you're in the middle of reading an article when the page jumps down. A firm understanding of the technologies that make up the web-especially HTTP and HTML/CSS/JavaScript-can help website owners reduce these annoying jumps while pages are being loaded, but far too many sites don't optimize their pages effectively to prevent these jumps.
+<span class="Identifier">8.</span> After the initial display of the page, the web browser continues, in the background, to download other resources that the page needs and update the page as it processes them. These resources include non-critical items such as images and advertising tracking scripts. As a result, you often see a web page displayed initially without images (especially on slower connections), with images being filled in as more of them are downloaded.
+<span class="Identifier">9.</span> When the page is fully loaded, the browser stops the loading icon (a spinning icon on or near the address bar for most browsers) and fires the _<span class="htmlItalic">OnLoad JavaScript</span>_ event, which JavaScript code may use as a sign that the page is ready to perform certain actions.
+<span class="Identifier">10.</span> At this point, the page is fully loaded, but the browser hasn't stopped sending out requests. We're long past the days when a web page was a page of static information. Many web pages are now feature-rich applications that continually communicate with various servers on the internet to send or load additional content. This content may be user-initiated actions, such as when you type requests in the search bar on Google's home page and instantly see search suggestions without having to click the Search button, or it may be application-driven actions, such as your Facebook or Twitter feed's automatically updating without your having to click a refresh button. These actions often happen in the background and are invisible to you, especially advertising and analytics scripts that track your actions on the site to report analytics to website owners and/or advertising networks.
+
+<span class="mkdDelimiter">![</span><span class="mkdLink">What happens when you browse the web</span><span class="mkdDelimiter">](</span><span class="mkdURL">./What happens when you browse the web.jpg</span><span class="mkdDelimiter">)</span>
+
+<span class="mkdHeading">##</span><span class="htmlH2"> HTTP Versions</span>
+
+The HTTP Request and Response syntax have been updated in each version.
+
+<span class="mkdHeading">###</span><span class="htmlH3"> HTTP/0.9</span>
+
+The first published specification for HTTP was version 0.9, issued in 1991.
+
+<span class="Identifier">1.</span> Connection is made over **<span class="htmlBold">TCP/IP</span>** or a similar connection-oriented service.
+<span class="Identifier">2.</span> Optional port or **<span class="htmlBold">80</span>** if no port is provided.
+<span class="Identifier">3.</span> A single line of ASCII text should be sent, consisting of **<span class="htmlBold">GET</span>**, the document address (with no spaces), and a carriage return and line feed (the carriage return being optional).
+<span class="Identifier">4.</span> Response is a message in HTML format (&quot;a byte stream of ASCII characters&quot;).
+<span class="Identifier">5.</span> The **<span class="htmlBold">connection is closed</span>** after each response is received.
+<span class="Identifier">6.</span> Hard to distinguish an error response from a satisfactory response.
+<span class="Identifier">7.</span> Server doesn't store any information about the request, hence it is **<span class="htmlBold">stateless</span>**.
+
+The only possible command in HTTP/0.9:
+
+<span class="String">```markdown</span>
+GET /page.html↵
+<span class="String">```</span>
+
+where:
+
+<span class="Identifier">-</span> <span class="String">`</span><span class="String">GET</span><span class="String">`</span> is an HTTP method.
+<span class="Identifier">-</span> <span class="String">`</span><span class="String">/page.html</span><span class="String">`</span> is the resource that we need.
+
+::: tip NOTE
+There is no concept of headers in HTTP/0.9 or any other media, such as images.
+:::
+
+<span class="mkdHeading">###</span><span class="htmlH3"> HTTP/1.0</span>
+
+The HTTP/1.0 RFC is not a formal specification and was published in 1996.
+
+<span class="Identifier">1.</span> More request methods: **<span class="htmlBold">HEAD</span>** and **<span class="htmlBold">POST</span>** were added to the previously defined GET.
+<span class="Identifier">2.</span> Addition of an optional **<span class="htmlBold">HTTP version number</span>** for all messages. HTTP/0.9 is assumed by default to aid in backward compatibility.
+<span class="Identifier">3.</span> **<span class="htmlBold">HTTP headers</span>**, which could be sent with both the request and the response to provide more information about the resource being requested and the response being sent.
+<span class="Identifier">4.</span> A **<span class="htmlBold">3-digit response code</span>** indicating (for example) whether the response was successful. This code also enabled redirect requests, conditional requests, and error status (404).
+<span class="Identifier">5.</span> **<span class="htmlBold">GET</span>** can send data in the form of query parameters that are specified at the end of a URL, after the **<span class="htmlBold">?</span>** character. <span class="String">`</span><span class="String"><a href="https://www.google.com/?q=search+string">https://www.google.com/?q=search+string</a></span><span class="String">`</span>.
+
+<span class="mkdHeading">####</span><span class="htmlH4"> Request Syntax</span>
+
+With headers:
+
+<span class="String">```markdown</span>
+GET /page.html HTTP/1.0↵
+Header1: Value1↵
+Header2: Value2↵
+↵
+<span class="String">```</span>
+
+And without headers:
+
+<span class="String">```markdown</span>
+GET /page.html HTTP/1.0↵
+↵
+<span class="String">```</span>
+
+Here we can see some changes to the HTTP/1.0 GET request as compared to HTTP/0.9:
+
+<span class="Identifier">-</span> The first line now contains an optional HTTP _<span class="htmlItalic">version</span>_ section.
+<span class="Identifier">-</span> Then an optional HTTP header section followed by two return characters (<span class="String">`</span><span class="String">↵</span><span class="String">`</span>)
+
+<span class="mkdHeading">####</span><span class="htmlH4"> Response Syntax</span>
+
+A typical response from a HTTP/1.0 server:
+
+<span class="String">```markdown</span>
+HTTP/1.0 200 OK
+Date: Sun, 27 Sep 2020 13:30:24 GMT
+Content-Type: text/html
+Server: Apache
+
+<span class="Comment">&lt;!doctype html&gt;</span>
+<span class="htmlTag">&lt;</span><span class="htmlTagName">html</span><span class="htmlTag">&gt;</span>
+<span class="htmlTag">&lt;</span><span class="htmlTagName">head</span><span class="htmlTag">&gt;</span>
+etc.
+<span class="String">```</span>
+
+<span class="Identifier">-</span> The first line consists of an HTTP version (HTTP/1.0), a 3-digit HTTP status code (200), and a text description of that status code (Ok).
+
+The status codes and descriptions are not present in HTTP/0.9.
+
+Here are some of the HTTP/1.0 response codes:
+
+| Category            | Value | Description           | Details                                                                                                                                                                                          |
+| ------------------- | ----- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1xx (informational) | N/A   | N/A                   | HTTP/1.0 doesn't define any 1xx status codes, but does define the category.                                                                                                                      |
+| 2xx (successful)    | 200   | OK                    | This code is the standard response code for a successful request.                                                                                                                                |
+|                     | 201   | Created               | This code should be returned for a POST request.                                                                                                                                                 |
+|                     | 202   | Accepted              | The request is being processed but hasn't completed processing yet.                                                                                                                              |
+|                     | 204   | No content            | The request has been accepted and processed, but there's no BODY response to send back.                                                                                                          |
+| 3xx (redirection)   | 300   | Multiple choices      | This code isn't used directly. It explains that the 3xx category implies that the resource is available at one (or more) locations, and the exact response provides more details on where it is. |
+|                     | 301   | Moved permanently     | The Location HTTP response header should provide the new URL of the resource.                                                                                                                    |
+|                     | 302   | Moved temporarily     | The Location HTTP response header should provide the new URL of the resource.                                                                                                                    |
+|                     | 304   | Not modified          | This code is used for conditional responses in which the BODY doesn't need to be sent again.                                                                                                     |
+| 4xx (client error)  | 400   | Bad request           | The request couldn't be understood and should be changed before resending.                                                                                                                       |
+|                     | 401   | Unauthorized          | This code usually means that you're not authenticated.                                                                                                                                           |
+|                     | 403   | Forbidden             | This code usually means that you're authenticated, but your credentials don't have access.                                                                                                       |
+|                     | 404   | Not found             | This code is probably the best-known HTTP status code, as it often appears on error pages.                                                                                                       |
+| 5xx (server error)  | 500   | Internal server error | The request couldn't be completed due to a server-side error.                                                                                                                                    |
+|                     | 501   | Not implemented       | The server doesn't recognize the request (such as an HTTP method that hasn't yet been implemented).                                                                                              |
+|                     | 502   | Bad gateway           | The server is acting as a gateway or proxy and received an error from the downstream server.                                                                                                     |
+|                     | 503   | Service unavailable   | The server is unable to fulfill the request, perhaps because the server is overloaded or down for maintenance.                                                                                   |
+
+::: tip NOTE
+Some missing codes _<span class="htmlItalic">(203, 303, 402)</span>_ which are not part of HTTP/1.0.
+<span class="mkdDelimiter">[</span><span class="mkdLink">List of all status codes</span><span class="mkdDelimiter">](</span><span class="mkdURL"><a href="https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml">https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml</a></span><span class="mkdDelimiter">)</span>
+:::
+
+<span class="mkdHeading">###</span><span class="htmlH3"> HTTP/1.1</span>
+
+The first HTTP/1.1 specification was published in January 1997, updated Specification in June 1999, and then enhanced for a third time in June 2014.
+
+Headers that are most used:
+
+<span class="mkdHeading">####</span><span class="htmlH4"> Host</span>
+
+Host is a **<span class="htmlBold">Mandatory header</span>**. The URL provided with the first line of an HTTP request isn't an absolute URL but a relative URL.
+Nowadays, many web servers host several sites on the same server (a situation is known as _<span class="htmlItalic">virtual hosting</span>_), so it's important to tell the server which site you want as well as which relative URL you want on that site.
+So, the host header was implemented to include the full absolute URL.
+
+<span class="String">```markdown</span>
+GET / HTTP/1.1
+Host: www.google.com
+<span class="String">```</span>
+
+::: warning NOTE
+
+<span class="String">```markdown</span>
+GET / HTTP/1.1
+<span class="String">```</span>
+
+As the above request is not according to the HTTP/1.1 specification, this request should be rejected by the server (with a **<span class="htmlBold">400</span>** response code).
+Most of the web servers are more forgiving than they should be and have a default host that is returned for such requests.
+:::
+
+::: tip CONVERSATION
+<span class="mkdDelimiter">[</span><span class="mkdLink">Link</span><span class="mkdDelimiter">](</span><span class="mkdURL"><a href="https://lists.w3.org/Archives/Public/ietf-http-wg-old/1999SepDec/0014.html">https://lists.w3.org/Archives/Public/ietf-http-wg-old/1999SepDec/0014.html</a></span><span class="mkdDelimiter">)</span> of the conversation over the HTTP host header.
+:::
+
+<span class="mkdHeading">####</span><span class="htmlH4"> Connection</span>
+
+The connection between the server and the client was closed after each request. This created unnecessary delays while requesting multiple resources.
+Hence, the new _<span class="htmlItalic">Connection</span>_ HTTP header with the value _<span class="htmlItalic">Keep-Alive</span>_ was added, so that the client can ask the server to keep the connection open for additional requests.
+
+<span class="String">```markdown</span>
+GET /page.html HTTP/1.0
+Connection: Keep-Alive
+<span class="String">```</span>
+
+<span class="Identifier">-</span> If the server supports persistent connections, it includes a _<span class="htmlItalic">Connection: Keep-Alive</span>_ header in the response:
+
+<span class="String">```markdown</span>
+HTTP/1.0 200 OK
+Date: Sun, 25 Jun 2017 13:30:24 GMT
+Connection: Keep-Alive
+Content-Type: text/html
+Content-Length: 12345
+Server: Apache
+
+<span class="Comment">&lt;!doctype html&gt;</span>
+<span class="htmlTag">&lt;</span><span class="htmlTagName">html</span><span class="htmlTag">&gt;</span>
+<span class="htmlTag">&lt;</span><span class="htmlTagName">head</span><span class="htmlTag">&gt;</span>
+etc.
+<span class="String">```</span>
+
+<span class="Identifier">-</span> It is difficult to know when the response is completed and when the client sends another request. To overcome this, **<span class="htmlBold">Content-Length HTTP header</span>** is used to define the length of the response body, and when the entire body is received, the client is free to send another request.
+<span class="Identifier">-</span> HTTP/1.1 sets **<span class="htmlBold">Connection: Keep-Alive</span>** by default, hence no need of including it in the header (some clients and servers include this).
+<span class="Identifier">-</span> If the server did want to close the connection, it had to explicitly include a **<span class="htmlBold">Connection: close</span>** HTTP header in the response.
+
+<span class="String">```markdown</span>
+HTTP/1.1 200 OK
+Date: Sun, 25 Jun 2017 13:30:24 GMT
+Connection: close
+Content-Type: text/html; charset=UTF-8
+Server: Apache
+
+<span class="Comment">&lt;!doctype html&gt;</span>
+<span class="htmlTag">&lt;</span><span class="htmlTagName">html</span><span class="htmlTag">&gt;</span>
+<span class="htmlTag">&lt;</span><span class="htmlTagName">head</span><span class="htmlTag">&gt;</span>
+etc.
+Connection closed by foreign host.
+<span class="String">```</span>
+
+| HTTP Version | Connection Header | Connection |
+| ------------ | ----------------- | ---------- |
+| HTTP/1.0     | Not Included      | Closed     |
+| HTTP/1.0     | Included          | Kept open  |
+| HTTP/1.1     | Both              | Kept Open  |
+
+::: tip NOTE
+Connection header is supported by many _<span class="htmlItalic">HTTP/1.0</span>_ servers, even though it wasn't included in the HTTP/1.0 specification.
+:::
+
+HTTP/1.1 added the concept of **<span class="htmlBold">pipelining</span>**, it is possible to send several requests over the same persistent connection and get the responses back in order. If a web browser is processing an HTML document, for example, and sees that it needs a CSS file and a JavaScript file, it should be able to send the requests for these files together and get the responses back in order rather than waiting for the first response before sending the second request.
+
+<span class="String">```markdown</span>
+GET /style.css HTTP/1.1
+Host: www.example.com
+
+GET /script.js HTTP/1.1
+Host: www.example.com
+
+HTTP/1.1 200 OK
+Date: Sun, 25 Jun 2017 13:30:24 GMT
+Content-Type: text/css; charset=UTF-8
+Content-Length: 1234
+Server: Apache
+
+.style {
+etc.
+
+HTTP/1.1 200 OK
+Date: Sun, 25 Jun 2017 13:30:25 GMT
+Content-Type: application/x-javascript; charset=UTF-8
+Content-Length: 5678
+Server: Apache
+
+Function(
+etc.
+<span class="String">```</span>
+
+::: danger IMPORTANT
+Support for pipelining in both clients (browsers) and servers is poor.
+So, HTTP/1.1 is still fundamentally a request-and-response protocol for most implementations.
+While that one request is being handled, the HTTP connection is blocked from being used for other requests.
+:::
+
+<span class="mkdHeading">####</span><span class="htmlH4"> Other New Features</span>
+
+<span class="Identifier">-</span> New methods are PUT, OPTIONS, and the less-used CONNECT, TRACE, and DELETE.
+<span class="Identifier">-</span> Better caching methods. These methods allowed the server to instruct the client to store the resource (such as a CSS file) in the browser's cache so it could be reused later if required. The Cache-Control HTTP header introduced in HTTP/1.1 had more options than the Expires header from HTTP/1.0.
+<span class="Identifier">-</span> HTTP cookies to allow HTTP sessions and move from the stateless protocol.
+<span class="Identifier">-</span> The introduction of character sets (as shown in some examples in this chapter) and language in HTTP responses.
+<span class="Identifier">-</span> Proxy support.
+<span class="Identifier">-</span> Authentication.
+<span class="Identifier">-</span> New status codes.
+<span class="Identifier">-</span> Trailing headers.
+
+<span class="mkdHeading">##</span><span class="htmlH2"> HTTPS</span>
+
+HTTP is a plain-text protocol. HTTP messages are unencrypted and are readable by any party.
+
+Hence, HTTPS a secure version of HTTP was introduced.
+
+**<span class="htmlBold">HTTPS</span>** encrypts messages in transit by using the **<span class="htmlBold">Transport Layer Security</span>** (TLS) protocol, though it's often known by its **<span class="htmlBold">previous incarnation as Secure Sockets Layer</span>** (SSL).
+
+HTTPS adds 3 important concepts to HTTP messages:
+
+<span class="Identifier">1.</span> **<span class="htmlBold">Encryption</span>** - Messages can't be read by third parties while in transit.
+<span class="Identifier">2.</span> **<span class="htmlBold">Integrity</span>** - The message hasn't been altered in transit, as the entire encrypted message is digitally signed, and that signature is cryptographically verified before decryption.
+<span class="Identifier">3.</span> **<span class="htmlBold">Authentication</span>** - The server is the one you intended to talk to.
+
+<span class="mkdHeading">###</span><span class="htmlH3"> SSL, TLS, HTTPS, and HTTP</span>
+
+History of HTTP encryption:
+
+<span class="Identifier">1.</span> SSLv1 was never released outside Netscape.
+<span class="Identifier">2.</span> SSLv2 and **<span class="htmlBold">SSLv3</span>** were released in 1995 and 1996 respectively.
+<span class="Identifier">3.</span> SSL was standardized as TLS.
+<span class="Identifier">4.</span> TLSv1.0 is similar to SSLv3, though not compatible.
+<span class="Identifier">5.</span> TLSv1.1 and TLSv1.2 were released in 2006 and 2008 respectively.
+<span class="Identifier">6.</span> **<span class="htmlBold">TLSv1.3</span>** was released in 2018 (current standard).
+<span class="Identifier">7.</span> **<span class="htmlBold">SSLv3</span>** was widely used, but in 2014 major vulnerabilities were discovered and support for SSLv3 is **<span class="htmlBold">not supported</span>** by browsers.
+
+<span class="mkdHeading">###</span><span class="htmlH3"> HTTPS Workings</span>
+
+HTTPS works by using public-key encryption, which allows servers to provide public keys in the form of digital certificates when users first connect. The browser encrypts messages by using this public key, which only the server can decrypt, as only it has the corresponding private key. This system allows us to communicate securely with a website without having to know a shared secret key in advance, which is crucial for a system like the internet, where new websites and users come and go every second of every day.
+
+The digital certificates are issued, and digitally signed, by various _<span class="htmlItalic">certificate authorities (CAs)</span>_ trusted by the browser.
+
+<span class="Identifier">-</span> Post **<span class="htmlBold">443</span>** is used instead of port _<span class="htmlItalic">80</span>_.
+<span class="Identifier">-</span> <span class="String">`</span><span class="String"><a href="https://">https://</a></span><span class="String">`</span> URL scheme is used instead of <span class="String">`</span><span class="String"><a href="http://">http://</a></span><span class="String">`</span>
+<span class="Identifier">-</span> HTTPS doesn't alter the way HTTP is used in terms of syntax or message format except for the encryption and decryption itself.
+
+::: danger Certificates
+HTTPS indicates to us that the connection is secure, but does not give any information about the trustworthiness of the server.
+
+Benefits of EV or Domain Validated (DV) or Organizational Validated (OV) certificates is highly disputed.
+:::
+
+Telnet cannot be used to send HTTPS requests as it dose not handle the encryption and decryption part. So, programs like **<span class="htmlBold">OpenSSL</span>** can be used.
+
+<span class="String">```bash</span>
+openssl s_client <span class="Special">-crlf</span> <span class="Special">-connect</span> www.google.com:443 <span class="Special">-quiet</span>↵
+GET / HTTP/<span class="Number">1</span>.<span class="Number">1</span>↵
+Host: www.google.com↵
+↵
+<span class="String">```</span>
+
+<span class="mkdHeading">##</span><span class="htmlH2"> Drawbacks Of HTTP/1.x</span>
+
+<span class="Identifier">-</span> The internet is built upon HTTP/1.x
+<span class="Identifier">-</span> Has been functioning reasonably well for a 20-year-old technology.
+
+<span class="mkdHeading">###</span><span class="htmlH3"> Why websites still take time to load even though the internet speed has increased significantly?</span>
+
+<span class="Identifier">-</span> Broadband speeds have increased, hence decreasing the time taken to download the assets required by the website.
+<span class="Identifier">-</span> As a result websites should load really fast, but that is not the case. Websites still take time to load.
+<span class="Identifier">-</span> This is due to the way HTTP/1.x works. HTTP was a request and response based protocol.
+<span class="Identifier">-</span> Each website makes multiple HTTP requests to get the required assets. These requests are synchronous, i.e. the second request is made only after a response is received for the first request.
+<span class="Identifier">-</span> Thus website loads slowly if there are many requests being made.
+
+Let us consider a scenario:
+
+Imagine a simple web page with some text and two images.
+
+<span class="Identifier">1.</span> Suppose that a request takes 50ms to reach the web server and the server takes 10ms to respond and the browser takes 10ms to process the response.
+<span class="Identifier">2.</span> Now the following steps happen when we request for a web page:
+
+    <span class="mkdDelimiter">![</span><span class="mkdLink">Web page load time</span><span class="mkdDelimiter">](</span><span class="mkdURL">./Web%20page%20load%20time.jpg</span><span class="mkdDelimiter">)</span>
+
+
+<span class="mkdHeading">##</span><span class="htmlH2"> Tools</span>
+
+There are many tools that can be used to create a TCP/IP connection, hence the same tools can be used to send a HTTP request.
+
+Some of the tools are:
+
+<span class="Identifier">1.</span> **<span class="htmlBold">Telnet</span>**: It opens a TCP/IP connection to a server.
+
+<span class="String">```bash</span>
+<span class="Statement">printf</span> <span class="Operator">'</span><span class="String">HEAD / HTTP/1.1\r\nHost: en.wikipedia.org\r\n\r\n</span><span class="Operator">'</span> <span class="Operator">|</span> nc en.wikipedia.org <span class="Number">80</span>
+<span class="String">```</span>
+
+<span class="Identifier">-</span> <span class="String">`</span><span class="String">printf</span><span class="String">`</span> - Similar to <span class="String">`</span><span class="String">cat</span><span class="String">`</span> but smarter
+<span class="Identifier">-</span> <span class="String">`</span><span class="String">nc</span><span class="String">`</span> - netCat is used to talk to internet
+
+<span class="Identifier">2.</span> **<span class="htmlBold">Openssl</span>**: Can be used to for HTTPS connection.
+
+::: tip Warning
+HTTP is not based on Ping. Ping is much simpler than HTTP
+:::
+
+<span class="mkdHeading">##</span><span class="htmlH2"> References</span>
+
+<span class="Identifier">-</span> <span class="mkdDelimiter">[</span><span class="mkdLink">URI - Specification</span><span class="mkdDelimiter">](</span><span class="mkdURL"><a href="https://tools.ietf.org/html/rfc1630">https://tools.ietf.org/html/rfc1630</a></span><span class="mkdDelimiter">)</span>
+<span class="Identifier">-</span> <span class="mkdDelimiter">[</span><span class="mkdLink">HTTP-Core Github</span><span class="mkdDelimiter">](</span><span class="mkdURL"><a href="https://github.com/httpwg/http-core">https://github.com/httpwg/http-core</a></span><span class="mkdDelimiter">)</span>
+</pre>
+  </body>
+</html>
+<!-- vim: set foldmethod=manual : -->
